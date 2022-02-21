@@ -1,6 +1,9 @@
 "use strict";
 
-module.exports.hello = async (event) => {
+const addTodo = async (event) => {
+
+  const {todo} = JSON.parse(event.body)
+
   return {
     statusCode: 200,
     body: JSON.stringify(
@@ -13,3 +16,7 @@ module.exports.hello = async (event) => {
     ),
   };
 };
+
+module.exports = {
+  handler:hello
+}

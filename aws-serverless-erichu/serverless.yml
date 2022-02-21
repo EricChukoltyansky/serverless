@@ -7,8 +7,22 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: src/hello.handler
     events:
       - httpApi:
           path: /
           method: get
+
+resources:
+ Resources: 
+  TodoTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+     TableName: TodoTable
+     BillingMode: PAY_PER_REQUEST
+     AttributeDefinitions:
+       - AttributeName: id
+         AttributeType: S
+     KeySchema:
+      - AttributeName: id
+        KeyType: HASH  
