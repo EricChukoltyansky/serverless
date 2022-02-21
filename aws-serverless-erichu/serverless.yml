@@ -1,4 +1,4 @@
-service: aws-node-http-api-project
+service: aws-serverless-erichu
 frameworkVersion: '3'
 
 provider:
