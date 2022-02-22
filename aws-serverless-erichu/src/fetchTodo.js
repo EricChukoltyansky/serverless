@@ -3,24 +3,27 @@
 const { v4 } = require("uuid");
 const AWS = require("aws-sdk");
 
-const fetchTodos = async (event) => {
+const fetchTodo = async (event) => {
   const dynamoDB = new AWS.DynamoDB.DocumentClient();
+  const { id } = event.pathParameters;
 
-  let todos;
+  let todo;
 
   try {
-    const results = await dynamoDB.scan({ TableName: "TodoTable" }).promise();
-    todos = results.Items
+    const result = await dynamoDB
+      .scan({ TableName: "TodoTable", Key: { id } })
+      .promise();
+    todo = result.Items;
   } catch (error) {
     console.log(error);
   }
 
   return {
     statusCode: 200,
-    body: JSON.stringify(todos),
+    body: JSON.stringify(todo),
   };
 };
 
 module.exports = {
-  handler: fetchTodos,
+  handler: fetchTodo,
 };
