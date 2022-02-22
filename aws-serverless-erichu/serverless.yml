@@ -3,7 +3,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs14.x,
+  runtime: nodejs14.x
   iamRoleStatements:
    - Effect: Allow
      Action:
@@ -18,6 +18,12 @@ functions:
       - httpApi:
           path: /
           method: post
+  fetchTodos:
+    handler: src/fetchTodos.handler
+    events:
+      - httpApi:
+          path: /todos
+          method: get      
 
 resources:
  Resources: 
